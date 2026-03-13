@@ -1,0 +1,62 @@
+<ion-header [translucent]="true">
+  <ion-toolbar [style.--background]="primaryColor()">
+    <ion-buttons slot="start"><ion-back-button defaultHref="/pokemon-list" color="light"></ion-back-button></ion-buttons>
+    <ion-title color="light"><span *ngIf="pokemon">{{ pokemon.name | titlecase }}</span></ion-title>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" (click)="toggleFav()" *ngIf="pokemon"><ion-icon slot="icon-only" [name]="isFavorite?'heart':'heart-outline'" color="light"></ion-icon></ion-button>
+      <ion-menu-button color="light" class="hamburger-btn"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="detail-content" [fullscreen]="true">
+  <div class="loading-state" *ngIf="isLoading"><ion-spinner name="crescent"></ion-spinner><p>Cargando datos del Pokémon...</p></div>
+  <div class="error-state" *ngIf="!isLoading && errorMessage"><div class="error-icon">😞</div><p>{{ errorMessage }}</p><ion-button fill="outline" color="primary" (click)="goBack()">Volver</ion-button></div>
+  <div *ngIf="!isLoading && pokemon">
+    <div class="hero-bg" [style.background]="'linear-gradient(180deg,'+primaryColor()+'99 0%,#0a0e1a 100%)'">
+      <div class="hero-pokeball-deco"></div>
+      <div class="hero-info">
+        <div class="hero-meta"><span class="pokemon-id">{{ fmtId(pokemon.id) }}</span><span class="pokemon-genus" *ngIf="genus()">{{ genus() }}</span></div>
+        <div class="badges-row" *ngIf="species">
+          <ion-badge *ngIf="species.is_legendary" color="warning">Legendario</ion-badge>
+          <ion-badge *ngIf="species.is_mythical" color="tertiary">Mítico</ion-badge>
+        </div>
+      </div>
+      <img [src]="getArt()" [alt]="pokemon.name" class="hero-pokemon-img">
+    </div>
+    <div class="types-section"><span class="type-badge-lg" *ngFor="let t of pokemon.types" [style.background]="getColor(t.type.name)">{{ t.type.name | titlecase }}</span></div>
+    <div class="flavor-text" *ngIf="flavorText()"><p>"{{ flavorText() }}"</p></div>
+    <div class="physical-row">
+      <div class="physical-card"><ion-icon name="resize-outline"></ion-icon><p class="phys-value">{{ fmtH(pokemon.height) }}</p><p class="phys-label">Altura</p></div>
+      <div class="physical-divider"></div>
+      <div class="physical-card"><ion-icon name="barbell-outline"></ion-icon><p class="phys-value">{{ fmtW(pokemon.weight) }}</p><p class="phys-label">Peso</p></div>
+      <div class="physical-divider"></div>
+      <div class="physical-card"><ion-icon name="flash-outline"></ion-icon><p class="phys-value">{{ pokemon.base_experience||'—' }}</p><p class="phys-label">Exp. Base</p></div>
+    </div>
+    <div class="tab-bar">
+      <button class="tab-btn" [class.active]="activeTab==='stats'" (click)="setTab('stats')">Estadísticas</button>
+      <button class="tab-btn" [class.active]="activeTab==='abilities'" (click)="setTab('abilities')">Habilidades</button>
+      <button class="tab-btn" [class.active]="activeTab==='moves'" (click)="setTab('moves')">Movimientos</button>
+    </div>
+    <div class="tab-content" *ngIf="activeTab==='stats'">
+      <div class="stat-row" *ngFor="let s of pokemon.stats">
+        <span class="stat-name">{{ fmtStat(s.stat.name) }}</span>
+        <span class="stat-value" [style.color]="statColor(s.base_stat)">{{ s.base_stat }}</span>
+        <div class="stat-bar-track"><div class="stat-bar-fill" [style.width.%]="statPct(s.base_stat)" [style.background]="statColor(s.base_stat)"></div></div>
+      </div>
+    </div>
+    <div class="tab-content" *ngIf="activeTab==='abilities'">
+      <div class="ability-item" *ngFor="let ab of pokemon.abilities">
+        <div class="ability-icon"><ion-icon name="sparkles-outline"></ion-icon></div>
+        <div class="ability-info"><p class="ability-name">{{ ab.ability.name | titlecase }}</p>
+          <ion-badge *ngIf="ab.is_hidden" color="medium">Oculta</ion-badge>
+          <ion-badge *ngIf="!ab.is_hidden" color="primary">Normal</ion-badge>
+        </div>
+      </div>
+    </div>
+    <div class="tab-content" *ngIf="activeTab==='moves'">
+      <div class="moves-grid"><div class="move-chip" *ngFor="let m of pokemon.moves | slice:0:30">{{ m.move.name | titlecase }}</div></div>
+      <p class="moves-note" *ngIf="pokemon.moves.length>30">+ {{ pokemon.moves.length-30 }} movimientos más</p>
+    </div>
+    <div class="bottom-spacer"></div>
+  </div>
+</ion-content>

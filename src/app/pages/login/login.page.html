@@ -1,0 +1,50 @@
+<ion-content class="login-content" [fullscreen]="true">
+  <div class="bg-layer">
+    <div class="bg-circle bg-circle-1"></div><div class="bg-circle bg-circle-2"></div>
+    <div class="pokeball-bg"></div>
+  </div>
+  <div class="login-container" [class.animate-out]="isAnimating">
+    <div class="login-header">
+      <div class="logo-wrapper">
+        <div class="pokeball-icon"><div class="pb-top"></div><div class="pb-band"><div class="pb-btn"></div></div><div class="pb-bottom"></div></div>
+      </div>
+      <h1 class="app-title">PokéApp</h1><p class="app-subtitle">Tu Pokédex Personal</p>
+    </div>
+    <div class="login-card">
+      <div class="card-header"><h2>Bienvenido de vuelta</h2><p>Inicia sesión para continuar tu aventura</p></div>
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <div class="input-group" [class.has-error]="emailCtrl?.invalid && emailCtrl?.touched">
+          <div class="input-wrapper">
+            <div class="input-icon"><ion-icon name="mail-outline"></ion-icon></div>
+            <ion-input formControlName="email" type="email" placeholder="Correo electrónico" autocomplete="email" class="custom-input"></ion-input>
+          </div>
+          <div class="error-message" *ngIf="emailCtrl?.invalid && emailCtrl?.touched">
+            <ion-icon name="alert-circle-outline"></ion-icon>
+            <span *ngIf="emailCtrl?.errors?.['required']">El correo es requerido</span>
+            <span *ngIf="emailCtrl?.errors?.['email']">Correo inválido</span>
+          </div>
+        </div>
+        <div class="input-group" [class.has-error]="passCtrl?.invalid && passCtrl?.touched">
+          <div class="input-wrapper">
+            <div class="input-icon"><ion-icon name="lock-closed-outline"></ion-icon></div>
+            <ion-input formControlName="password" [type]="showPassword?'text':'password'" placeholder="Contraseña" class="custom-input"></ion-input>
+            <button type="button" class="toggle-pass-btn" (click)="togglePassword()"><ion-icon [name]="showPassword?'eye-off-outline':'eye-outline'"></ion-icon></button>
+          </div>
+          <div class="error-message" *ngIf="passCtrl?.invalid && passCtrl?.touched">
+            <ion-icon name="alert-circle-outline"></ion-icon>
+            <span *ngIf="passCtrl?.errors?.['required']">La contraseña es requerida</span>
+            <span *ngIf="passCtrl?.errors?.['minlength']">Mínimo 6 caracteres</span>
+          </div>
+        </div>
+        <ion-button type="submit" expand="block" class="login-btn" [disabled]="loginForm.invalid">
+          <ion-icon name="enter-outline" slot="start"></ion-icon>Iniciar Sesión
+        </ion-button>
+      </form>
+      <div class="demo-section">
+        <button class="demo-link" (click)="showDemoCredentials()"><ion-icon name="information-circle-outline"></ion-icon> Ver credenciales de prueba</button>
+      </div>
+    </div>
+    <div class="login-footer"><p>Powered by <span>PokéAPI</span></p>
+      <h1></h1><p class="copyright">© 2026 Jose Pablo Robles Huerta & Jose Alberto Casarrubias. Todos los derechos reservados.</p></div>
+  </div>
+</ion-content>

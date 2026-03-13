@@ -1,0 +1,54 @@
+<ion-app>
+  <ion-menu contentId="main-content" type="overlay" side="start">
+    <ion-header class="menu-header">
+      <ion-toolbar>
+        <div class="menu-logo-section">
+          <div class="pokeball-logo">
+            <div class="pokeball-top"></div>
+            <div class="pokeball-middle"><div class="pokeball-center"></div></div>
+            <div class="pokeball-bottom"></div>
+          </div>
+          <div class="menu-title-block">
+            <h2 class="menu-app-title">PokéApp</h2>
+            <p class="menu-version">v1.0.0</p>
+          </div>
+        </div>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="menu-content">
+      <div class="user-profile-card" *ngIf="currentUser">
+        <div class="user-avatar"><ion-icon name="person-circle-outline"></ion-icon></div>
+        <div class="user-info">
+          <p class="user-name">{{ currentUser.name }}</p>
+          <p class="user-email">{{ currentUser.email }}</p>
+          <ion-badge color="warning" class="trainer-badge">
+            <ion-icon name="shield-checkmark-outline"></ion-icon> Entrenador
+          </ion-badge>
+        </div>
+      </div>
+      <div class="menu-divider"><span>Navegación</span></div>
+      <ion-list lines="none" class="menu-list">
+        <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
+          <ion-item [routerLink]="p.url" routerLinkActive="selected" routerDirection="root"
+            class="menu-item" button detail="false" (click)="closeMenu()">
+            <div class="menu-icon-wrapper" slot="start" [class]="'icon-' + p.color">
+              <ion-icon [name]="p.icon"></ion-icon>
+            </div>
+            <ion-label>{{ p.title }}</ion-label>
+            <ion-icon name="chevron-forward-outline" slot="end" class="menu-arrow"></ion-icon>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+      <div class="menu-spacer"></div>
+      <div class="menu-footer">
+        <ion-item button detail="false" class="logout-item" (click)="logout()">
+          <div class="menu-icon-wrapper icon-danger" slot="start">
+            <ion-icon name="log-out-outline"></ion-icon>
+          </div>
+          <ion-label color="danger">Cerrar Sesión</ion-label>
+        </ion-item>
+      </div>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main-content"></ion-router-outlet>
+</ion-app>

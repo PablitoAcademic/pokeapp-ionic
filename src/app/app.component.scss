@@ -1,0 +1,31 @@
+ion-menu { --width:300px; --background:#0d1117; }
+.menu-header ion-toolbar { --background:linear-gradient(135deg,#cc0000,#ff0000,#ff6b6b); --border-width:0; padding:8px 0; }
+.menu-logo-section { display:flex; align-items:center; padding:12px 16px; gap:12px; }
+.pokeball-logo { width:52px; height:52px; border-radius:50%; overflow:hidden; border:3px solid rgba(255,255,255,0.9); flex-shrink:0; box-shadow:0 4px 15px rgba(0,0,0,0.3); }
+.pokeball-top { height:50%; background:#cc0000; }
+.pokeball-middle { height:6px; background:white; display:flex; align-items:center; justify-content:center; position:relative; z-index:2; }
+.pokeball-center { width:14px; height:14px; background:white; border-radius:50%; border:3px solid #333; position:absolute; top:50%; transform:translateY(-50%); }
+.pokeball-bottom { height:calc(50% - 6px); background:white; }
+.menu-app-title { font-size:22px; font-weight:800; color:white; margin:0; }
+.menu-version { font-size:11px; color:rgba(255,255,255,0.7); margin:2px 0 0; letter-spacing:1px; }
+.menu-content { --background:#0d1117; }
+.user-profile-card { display:flex; align-items:center; padding:20px 16px; background:linear-gradient(135deg,rgba(255,0,0,0.1),rgba(255,107,107,0.05)); border-bottom:1px solid rgba(255,255,255,0.05); gap:14px; }
+.user-avatar ion-icon { font-size:52px; color:#ff4444; }
+.user-name { font-size:16px; font-weight:700; color:white; margin:0 0 3px; }
+.user-email { font-size:12px; color:rgba(255,255,255,0.5); margin:0 0 8px; }
+.trainer-badge { display:inline-flex; align-items:center; gap:4px; font-size:11px; padding:3px 8px; border-radius:20px; }
+.menu-divider { padding:20px 16px 8px; }
+.menu-divider span { font-size:11px; font-weight:700; color:rgba(255,255,255,0.3); letter-spacing:2px; text-transform:uppercase; }
+.menu-list { padding:0 12px; background:transparent; }
+.menu-item { --background:transparent; --background-hover:rgba(255,255,255,0.05); --border-radius:12px; --color:rgba(255,255,255,0.85); --padding-start:12px; --inner-padding-end:12px; margin-bottom:4px; border-radius:12px; transition:all 0.2s; }
+.menu-item.selected { --background:rgba(255,50,50,0.15); --color:#ff4444; border:1px solid rgba(255,50,50,0.2); }
+.menu-item ion-label { font-size:15px; font-weight:500; }
+.menu-arrow { font-size:14px; color:rgba(255,255,255,0.2); }
+.menu-icon-wrapper { width:36px; height:36px; border-radius:10px; display:flex; align-items:center; justify-content:center; margin-right:12px; }
+.menu-icon-wrapper ion-icon { font-size:18px; color:white; }
+.icon-primary { background:rgba(56,128,255,0.2); } .icon-primary ion-icon { color:#3880ff; }
+.icon-success { background:rgba(45,211,111,0.2); } .icon-success ion-icon { color:#2dd36f; }
+.icon-danger  { background:rgba(235,68,90,0.2);  } .icon-danger  ion-icon { color:#eb445a; }
+.menu-spacer { flex:1; min-height:40px; }
+.menu-footer { padding:8px 12px 20px; border-top:1px solid rgba(255,255,255,0.05); margin-top:12px; }
+.logout-item { --background:transparent; --background-hover:rgba(235,68,90,0.08); --border-radius:12px; border-radius:12px; }

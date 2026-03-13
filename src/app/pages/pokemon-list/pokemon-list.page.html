@@ -1,0 +1,37 @@
+<ion-header class="custom-header" [translucent]="true">
+  <ion-toolbar><ion-buttons slot="start"><ion-menu-button class="hamburger-btn"></ion-menu-button></ion-buttons>
+    <ion-title><span class="header-logo">Poké</span><span class="header-logo-accent">Dex</span></ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="list-content" [fullscreen]="true">
+  <div class="search-section"><div class="search-wrapper">
+    <ion-icon name="search-outline" class="search-icon"></ion-icon>
+    <ion-input [formControl]="searchCtrl" placeholder="Buscar por nombre o ID..." class="search-input"></ion-input>
+    <button class="clear-btn" *ngIf="searchCtrl.value" (click)="clearSearch()"><ion-icon name="close-circle"></ion-icon></button>
+  </div></div>
+  <div class="type-filter-section"><div class="filter-scroll">
+    <button class="type-chip" *ngFor="let type of types" [class.active]="selectedType===type" [style.--chip-color]="getColor(type)" (click)="selectType(type)">{{ type }}</button>
+  </div></div>
+  <div class="center-message" *ngIf="isSearching"><ion-spinner name="crescent" color="primary"></ion-spinner><p>Buscando...</p></div>
+  <div class="center-message" *ngIf="searchMode && !isSearching && searchResults.length===0"><div class="empty-icon">🔍</div><p>No se encontró ningún Pokémon</p><button class="retry-btn" (click)="clearSearch()">Limpiar búsqueda</button></div>
+  <div class="pokemon-grid" *ngIf="isLoading && !searchMode">
+    <div class="skeleton-card" *ngFor="let i of [1,2,3,4,5,6,7,8]"><div class="sk-img"></div><div class="sk-text sk-text-short"></div><div class="sk-text sk-text-long"></div></div>
+  </div>
+  <div class="pokemon-grid" *ngIf="!isLoading || searchMode">
+    <div class="poke-card" *ngFor="let p of displayed; trackBy: trackBy" (click)="goDetail(p.id)" [style.--type-color]="getColor(primaryType(p))">
+      <div class="poke-bg-circle"></div>
+      <div class="poke-header"><span class="poke-id">{{ fmtId(p.id) }}</span>
+        <button class="fav-btn" (click)="toggleFav($event,p.id)" [class.is-fav]="isFav(p.id)"><ion-icon [name]="isFav(p.id)?'heart':'heart-outline'"></ion-icon></button>
+      </div>
+      <img [src]="getArt(p)" [alt]="p.name" class="poke-img" loading="lazy">
+      <div class="poke-footer">
+        <p class="poke-name">{{ p.name | titlecase }}</p>
+        <div class="poke-types"><span class="type-pill" *ngFor="let t of p.types" [style.background]="getColor(t.type.name)">{{ t.type.name }}</span></div>
+      </div>
+    </div>
+  </div>
+  <ion-infinite-scroll (ionInfinite)="loadMore($event)" threshold="200px" *ngIf="!searchMode && !selectedType">
+    <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Cargando más Pokémon..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  <div class="bottom-spacer"></div>
+</ion-content>

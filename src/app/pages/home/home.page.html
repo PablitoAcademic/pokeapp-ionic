@@ -1,0 +1,43 @@
+<ion-header class="custom-header" [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start"><ion-menu-button class="hamburger-btn"></ion-menu-button></ion-buttons>
+    <ion-title><span class="header-logo">Poké</span><span class="header-logo-accent">App</span></ion-title>
+    <ion-buttons slot="end"><ion-button fill="clear" (click)="goFav()"><ion-icon slot="icon-only" name="heart" color="danger"></ion-icon></ion-button></ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="home-content" [fullscreen]="true">
+  <div class="hero-section">
+    <div class="hero-bg"><div class="hero-pokeball"></div></div>
+    <div class="hero-content">
+      <div class="greeting"><p class="greeting-time">¡Bienvenido de vuelta!</p><h1 class="greeting-name">{{ currentUser?.name }}</h1></div>
+      <div class="trainer-card">
+        <div class="trainer-avatar"><ion-icon name="person-circle"></ion-icon></div>
+        <div class="trainer-details"><p class="trainer-label">ENTRENADOR</p><p class="trainer-email">{{ currentUser?.email }}</p></div>
+      </div>
+    </div>
+  </div>
+  <div class="stats-row">
+    <div class="stat-card" (click)="goList()"><div class="stat-icon-wrap stat-blue"><ion-icon name="layers-outline"></ion-icon></div><div class="stat-info"><p class="stat-number">{{ totalPokemon }}</p><p class="stat-label">Pokémon</p></div></div>
+    <div class="stat-card" (click)="goFav()"><div class="stat-icon-wrap stat-red"><ion-icon name="heart-outline"></ion-icon></div><div class="stat-info"><p class="stat-number">{{ favoritesCount }}</p><p class="stat-label">Favoritos</p></div></div>
+    <div class="stat-card"><div class="stat-icon-wrap stat-yellow"><ion-icon name="star-outline"></ion-icon></div><div class="stat-info"><p class="stat-number">18</p><p class="stat-label">Tipos</p></div></div>
+  </div>
+  <div class="section-header"><h2 class="section-title">Acciones Rápidas</h2></div>
+  <div class="quick-actions">
+    <ion-card class="action-card action-pokedex" (click)="goList()"><div class="action-card-content"><div class="action-icon">🔍</div><div class="action-text"><h3>Explorar Pokédex</h3><p>Descubre todos los Pokémon</p></div><ion-icon name="chevron-forward" class="action-arrow"></ion-icon></div></ion-card>
+    <ion-card class="action-card action-favorites" (click)="goFav()"><div class="action-card-content"><div class="action-icon">❤️</div><div class="action-text"><h3>Mis Favoritos</h3><p>{{ favoritesCount }} guardados</p></div><ion-icon name="chevron-forward" class="action-arrow"></ion-icon></div></ion-card>
+  </div>
+  <div class="section-header"><h2 class="section-title">Pokémon Destacados</h2><button class="see-all-btn" (click)="goList()">Ver todos</button></div>
+  <div class="loading-grid" *ngIf="isLoading"><div class="skeleton-card" *ngFor="let i of [1,2,3,4,5,6]"></div></div>
+  <div class="featured-grid" *ngIf="!isLoading">
+    <div class="pokemon-card" *ngFor="let p of featuredPokemons" (click)="goDetail(p.id)" [style.--type-color]="getColor(primaryType(p))">
+      <div class="pokemon-card-bg"></div>
+      <div class="pokemon-number">{{ fmtId(p.id) }}</div>
+      <img [src]="getArt(p)" [alt]="p.name" class="pokemon-img" loading="lazy">
+      <div class="pokemon-info">
+        <p class="pokemon-name">{{ p.name | titlecase }}</p>
+        <div class="pokemon-types"><span class="type-badge" *ngFor="let t of p.types" [style.background]="getColor(t.type.name)">{{ t.type.name }}</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="bottom-spacer"></div>
+</ion-content>

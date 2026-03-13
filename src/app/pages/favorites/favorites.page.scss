@@ -1,0 +1,36 @@
+.fav-content{--background:#0a0e1a}
+.loading-state{display:flex;flex-direction:column;align-items:center;justify-content:center;height:60vh;gap:16px}
+.loading-state ion-spinner{--color:#ff4444;width:40px;height:40px}
+.loading-state p{color:rgba(255,255,255,0.5);font-size:15px}
+.empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 24px;text-align:center;gap:14px}
+.empty-illustration{margin-bottom:8px}
+.empty-pokeball{width:90px;height:90px;border-radius:50%;border:5px solid rgba(255,255,255,0.15);overflow:hidden;margin:0 auto;opacity:0.4}
+.ep-top{height:50%;background:rgba(255,68,68,0.5)}
+.ep-band{height:8px;background:rgba(255,255,255,0.3);display:flex;align-items:center;justify-content:center}
+.ep-center{width:16px;height:16px;border-radius:50%;background:rgba(255,255,255,0.5);border:3px solid rgba(255,255,255,0.2)}
+.ep-bottom{height:calc(50% - 8px);background:rgba(255,255,255,0.1)}
+.empty-state h2{font-size:22px;font-weight:700;color:white;margin:0}
+.empty-state p{font-size:14px;color:rgba(255,255,255,0.45);margin:0;max-width:260px;line-height:1.6}
+.empty-state ion-button{margin-top:8px;--border-radius:12px}
+.favorites-header{padding:16px 16px 4px}
+.fav-count{display:flex;align-items:center;gap:6px;font-size:14px;color:rgba(255,255,255,0.5);margin:0}
+.fav-count ion-icon{font-size:16px}
+.fav-list{display:flex;flex-direction:column;gap:10px;padding:8px 16px 0}
+.fav-card{--type-color:#68a090;display:flex;align-items:center;background:linear-gradient(135deg,#141a2e,#1a2040);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:14px;cursor:pointer;position:relative;overflow:hidden;transition:transform 0.2s}
+.fav-card:active{transform:scale(0.98)}
+.fav-card-bg{position:absolute;width:200px;height:200px;border-radius:50%;background:var(--type-color);opacity:0.06;right:-60px;top:50%;transform:translateY(-50%);filter:blur(30px)}
+.fav-img{width:80px;height:80px;object-fit:contain;flex-shrink:0;filter:drop-shadow(0 4px 12px rgba(0,0,0,0.4));position:relative;z-index:1;transition:transform 0.3s}
+.fav-card:hover .fav-img{transform:scale(1.08)}
+.fav-info{flex:1;padding-left:14px;position:relative;z-index:1}
+.fav-id{font-size:11px;color:rgba(255,255,255,0.3);font-weight:600;margin:0 0 3px}
+.fav-name{font-size:17px;font-weight:700;color:white;margin:0 0 6px}
+.fav-types{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:10px}
+.type-tag{font-size:10px;color:white;padding:2px 8px;border-radius:20px;font-weight:600;text-transform:capitalize;opacity:0.9}
+.fav-stats{display:flex;gap:10px}
+.mini-stat{display:flex;flex-direction:column;align-items:center;gap:1px}
+.ms-name{font-size:9px;color:rgba(255,255,255,0.3);font-weight:700}
+.ms-val{font-size:13px;font-weight:700;color:rgba(255,255,255,0.8)}
+.remove-btn{background:rgba(235,68,90,0.1);border:1px solid rgba(235,68,90,0.2);border-radius:10px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;position:relative;z-index:2;flex-shrink:0}
+.remove-btn ion-icon{font-size:18px;color:#eb445a}
+.remove-btn:active{background:rgba(235,68,90,0.25)}
+.bottom-spacer{height:32px}
