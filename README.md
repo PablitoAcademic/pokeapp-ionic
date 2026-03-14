@@ -84,9 +84,15 @@ Haz commit de tus cambios: git commit -m 'feat: agrega nueva funcionalidad'
 Push a tu rama: git push origin feature/nueva-funcionalidad
 Abre un Pull Request
 
-
 📄 Licencia
 © 2026 — Todos los derechos reservados.
+
+HECHO POR:
+
+*JOSE ALBERTO CASARRUBIAS 
+--------------------------------------------------
+*JOSE PABLO ROBLES HUERTA 
+--------------------------------------------------
 
 <p align="center">
   Hecho con ❤️ y mucho café ☕ — Datos provistos por <a href="https://pokeapi.co/">PokéAPI</a>
